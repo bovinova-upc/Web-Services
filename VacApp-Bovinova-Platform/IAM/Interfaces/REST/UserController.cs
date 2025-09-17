@@ -82,7 +82,7 @@ namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
 
             // Próximas campañas
             var nextCampaigns = campaigns
-                    .Where(c => c.StartDate >= DateTime.Now)
+                    .Where(c => c.StartDate >= DateOnly.FromDateTime(DateTime.Now))
                     .Select(c => new CampaignInfoResource(c.Id, c.Name, c.StartDate))
                     .ToArray();
 

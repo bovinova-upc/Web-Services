@@ -7,19 +7,19 @@ public class Campaign
     public int Id { get; private set; }
     public string Name { get; private set; }
     public string Description { get; private set; }
-    public DateTime StartDate { get; private set; }
-    public DateTime EndDate { get; private set; }
+    public DateOnly StartDate { get; private set; }
+    public DateOnly EndDate { get; private set; }
     public int UserId { get; private set; }
 
     protected Campaign()
     {
         Name = string.Empty;
         Description = string.Empty;
-        StartDate = DateTime.Now;
-        EndDate = DateTime.Now;
+        StartDate = DateOnly.FromDateTime(DateTime.Now);
+        EndDate = DateOnly.FromDateTime(DateTime.Now);
     }
 
-    public Campaign(string name, string description, DateTime startDate, DateTime endDate, int userId)
+    public Campaign(string name, string description, DateOnly startDate, DateOnly endDate, int userId)
     {
         Name = name;
         Description = description;

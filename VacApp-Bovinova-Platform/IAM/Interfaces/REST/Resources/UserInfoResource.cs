@@ -12,5 +12,5 @@ public record UserInfoResource(
 public record CampaignInfoResource(
     int id,
     string name,
-    DateTime startDate
+    DateOnly startDate
 );

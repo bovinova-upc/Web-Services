@@ -25,11 +25,11 @@ public class Product
     [Required]
     public int UserId { get; private set; }
 
-    public DateTime? ExpirationDate { get; private set; }
+    public DateOnly? ExpirationDate { get; private set; }
 
     private Product() { Name = string.Empty; }
 
-    public Product(string name, int categoryId, int quantity, int userId, DateTime? expirationDate = null)
+    public Product(string name, int categoryId, int quantity, int userId, DateOnly? expirationDate = null)
     {
         Name = name;
         CategoryId = categoryId;

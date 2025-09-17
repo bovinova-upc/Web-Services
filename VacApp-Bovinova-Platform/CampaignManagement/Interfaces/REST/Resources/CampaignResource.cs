@@ -4,6 +4,6 @@ public record CampaignResource(
     int Id,
     string Name,
     string Description,
-    DateTime StartDate,
-    DateTime EndDate,
+    DateOnly StartDate,
+    DateOnly EndDate,
     int UserId);
