@@ -5,6 +5,7 @@ using VacApp_Bovinova_Platform.Shared.Infrastructure.Persistence.EFC.Configurati
 using VacApp_Bovinova_Platform.StaffAdministration.Domain.Model.Aggregates;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Aggregates;
 using VacApp_Bovinova_Platform.CampaignManagement.Domain.Model.Aggregates;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace VacApp_Bovinova_Platform.Shared.Infrastructure.Persistence.EFC.Configuration;
 
@@ -20,6 +21,14 @@ public class AppDbContext : DbContext
     {
         optionsBuilder.AddCreatedUpdatedInterceptor();
         base.OnConfiguring(optionsBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        // DateOnly → DateTime
+        configurationBuilder
+            .Properties<DateOnly>()
+            .HaveConversion<DateOnlyConverter>();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -98,4 +107,13 @@ public class AppDbContext : DbContext
 
         builder.UseSnakeCaseNamingConvention();
     }
+}
+
+public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
+{
+    public DateOnlyConverter()
+        : base(
+            d => d.ToDateTime(TimeOnly.MinValue),
+            d => DateOnly.FromDateTime(d))
+    { }
 }
