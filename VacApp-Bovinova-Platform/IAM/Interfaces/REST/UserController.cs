@@ -11,6 +11,8 @@ using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources.UserResources;
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform;
 using VacApp_Bovinova_Platform.RanchManagement.Domain.Model.Queries;
 using VacApp_Bovinova_Platform.RanchManagement.Domain.Services;
+using VacApp_Bovinova_Platform.StaffAdministration.Domain.Model.Queries;
+using VacApp_Bovinova_Platform.StaffAdministration.Domain.Services;
 
 namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
 {
@@ -24,6 +26,8 @@ namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
         IUserQueryService queryService,
         IBovineQueryService bovineQueryService,
         ICampaignQueryService campaignQueryService,
+    IProductQueryService productQueryService,
+        IStaffQueryService staffQueryService,
         IStableQueryService stableQueryService
         ) : ControllerBase
     {
@@ -80,6 +84,14 @@ namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
             var campaigns = await campaignQueryService.Handle(new GetAllCampaignsQuery(user.Id));
             var totalCampaigns = campaigns.Count();
 
+            // Total de productos
+            var products = await productQueryService.Handle(new GetProductsByUserIdQuery(user.Id));
+            var totalProducts = products.Sum(p => p.Quantity);
+
+            // Total de personal
+            var staff = await staffQueryService.Handle(new GetAllStaffQuery(user.Id));
+            var totalStaff = staff.Count();
+
             // Próximas campañas
             var nextCampaigns = campaigns
                     .Where(c => c.StartDate >= DateOnly.FromDateTime(DateTime.Now))
@@ -92,6 +104,8 @@ namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
                     user.Username,
                     totalBovines,
                     totalCampaigns,
+                    totalStaff,
+                    totalProducts,
                     totalStables,
                     nextCampaigns);
             return Ok(resource);

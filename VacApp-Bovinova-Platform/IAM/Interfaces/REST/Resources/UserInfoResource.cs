@@ -5,6 +5,8 @@ public record UserInfoResource(
    string name,
    int totalAnimals,
    int totalCampaigns,
+   int totalStaff,
+   int totalProducts,
    int totalStables,
    CampaignInfoResource[] nextCampaigns
 );

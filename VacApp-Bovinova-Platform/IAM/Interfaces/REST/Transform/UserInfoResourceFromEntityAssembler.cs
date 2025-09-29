@@ -9,6 +9,8 @@ public static class UserInfoResourceFromEntityAssembler
         User user,
         int totalBovines,
         int totalCampaigns,
+        int totalStaff,
+        int totalProducts,
         int totalStables,
         CampaignInfoResource[] nextCampaigns)
     {
@@ -17,6 +19,8 @@ public static class UserInfoResourceFromEntityAssembler
             user.Username,
             totalBovines,
             totalCampaigns,
+            totalStaff,
+            totalProducts,
             totalStables,
             nextCampaigns
         );
