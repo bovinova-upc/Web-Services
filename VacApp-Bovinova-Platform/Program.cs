@@ -141,6 +141,10 @@ builder.Services.AddScoped<IStableRepository, StableRepository>();
 builder.Services.AddScoped<IStableQueryService, StableQueryService>();
 builder.Services.AddScoped<IStableCommandService, StableCommandService>();
 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryQueryService, CategoryQueryService>();
+builder.Services.AddScoped<ICategoryCommandService, CategoryCommandService>();
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
