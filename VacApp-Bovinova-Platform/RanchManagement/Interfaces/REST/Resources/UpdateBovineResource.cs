@@ -16,6 +16,5 @@ public class UpdateBovineResource
     public string Gender { get; set; }
     public DateOnly BirthDate { get; set; }
     public string Breed { get; set; }
-    public string Location { get; set; }
     public int StableId { get; set; }
 }

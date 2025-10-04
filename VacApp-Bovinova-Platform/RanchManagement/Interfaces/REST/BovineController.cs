@@ -85,8 +85,7 @@ public class BovineController(IBovineCommandService commandService,
     }
 
     [HttpPut("{id}")]
-    [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UpdateBovine(int id, [FromForm] UpdateBovineResource resource)
+    public async Task<IActionResult> UpdateBovine(int id, UpdateBovineResource resource)
     {
         var command = UpdateBovineCommandFromResourceAssembler.ToCommandFromResource(id, resource);
         var result = await commandService.Handle(command);
